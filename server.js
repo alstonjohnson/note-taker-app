@@ -29,5 +29,5 @@ app.get('/', (req, res) =>
 
 
 app.listen(PORT, () => {
-    console.log(`Please check localhost${PORT}`);
+    console.log(`Please check http://localhost:${PORT}`);
   });
