@@ -12,8 +12,15 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app);
+// GET Route for homepage
+app.get('/', (req, res) =>
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+  );
+  
+  // GET Route for feedback page
+  app.get('/feedback', (req, res) =>
+    res.sendFile(path.join(__dirname, '/public/pages/notes.html'))
+  );
 
 app.listen(PORT, () => {
     console.log(`Please check localhost${PORT}`);
