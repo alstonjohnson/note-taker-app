@@ -50,7 +50,7 @@ app.get('/', (req, res) =>
     let newNote = req.body;
 
     // This allows the test note to be the original note.
-    let highestId = 99;
+    let highestId = 0;
     // This loops through the array and finds the highest ID.
     for (let i = 0; i < database.length; i++) {
         let individualNote = database[i];
