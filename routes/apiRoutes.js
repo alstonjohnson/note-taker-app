@@ -9,11 +9,11 @@ app.get('/api/notes', (req, res) => {
 
 
 app.post('/api/notes', (req, res) => {
-    let db = fs.readFileSync('db/db.json');
+    const db = fs.readFileSync('db/db.json');
     db = JSON.parse(db);
     res.json(db);
 
-    let userNote = {
+    const userNote = {
         title: req.body.title,
         text: req.body.text,
         id: uuidv4(),
