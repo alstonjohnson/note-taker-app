@@ -4,17 +4,18 @@ const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const path = require('path');
-const database = require("./db/db")
+const db = require("./db/db")
 const fs = require('fs')
 
 
-function readNotesFromFile() {
+function readNotesFromFile(callback) {
     fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             return;
         }
-        db = JSON.parse(data);
+       const database = JSON.parse(data);
+       callback(database)
     });
 }
 
@@ -41,7 +42,9 @@ app.get('*', (req, res) =>
 
 app.route("/api/notes")
     .get(function (req, res) {
-        res.json(database);
+        readNotesFromFile((data) => {
+            res.json(data);
+        });
     })
 
 
@@ -52,8 +55,8 @@ app.route("/api/notes")
         // This allows the test note to be the original note.
         let highestId = 0;
         // This loops through the array and finds the highest ID.
-        for (let i = 0; i < database.length; i++) {
-            let individualNote = database[i];
+        for (let i = 0; i < db.length; i++) {
+            let individualNote = db[i];
 
             if (individualNote.id > highestId) {
                 // highestId will always be the highest numbered id in the notesArray.
@@ -63,10 +66,10 @@ app.route("/api/notes")
         // This assigns an ID to the newNote. 
         newNote.id = highestId + 1;
         // We push it to db.json.
-        database.push(newNote)
+        db.push(newNote)
 
         // Write the db.json file again.
-        fs.writeFile(jsonFilePath, JSON.stringify(database), function (err) {
+        fs.writeFile(jsonFilePath, JSON.stringify(db), function (err) {
 
             if (err) {
                 return console.log(err);
@@ -79,13 +82,9 @@ app.route("/api/notes")
 
 
 
-readNotesFromFile();
-
-
-
-
-app.listen(PORT, () => {
-    console.log(`Please check http://localhost:${PORT}`);
+readNotesFromFile((data) => {
+    app.listen(PORT, () => {
+        console.log(`Please check http://localhost:${PORT}`);
+    });
 });
-
 
