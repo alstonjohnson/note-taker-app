@@ -29,7 +29,10 @@ app.get('/', (req, res) =>
   );
 
 
-
+  app.route("/api/notes")
+  .get(function (req, res) {
+      res.json(database);
+  })
 
 
 
