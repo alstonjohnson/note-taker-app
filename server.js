@@ -14,8 +14,7 @@ function readNotesFromFile(callback) {
             console.error(err);
             return;
         }
-       const database = JSON.parse(data);
-       callback(database)
+        database = JSON.parse(data);
     });
 }
 
@@ -82,9 +81,13 @@ app.route("/api/notes")
 
 
 
-readNotesFromFile((data) => {
-    app.listen(PORT, () => {
-        console.log(`Please check http://localhost:${PORT}`);
-    });
+readNotesFromFile();
+
+
+
+
+app.listen(PORT, () => {
+    console.log(`Please check http://localhost:${PORT}`);
 });
+
 
