@@ -10,10 +10,11 @@ npm i
 ## Usage
 npm start 
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!Link to deployed site: (https://alstonjohnson.github.io/task-board/)
 
 ## Credits
-I had help from AskBCS as well as the EXPERT Learning Assistant
+
+I had help from AskBCS as well as the EXPERT Learning Assistant and my Tutor Charlie
+
 ## License
 
 Please refer to the LICENSE in the repo.
